@@ -5,10 +5,11 @@ import Home from "./core/Home";
 import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import Orders from "./core/Orders";
-import UserDashboard from "./user/UserDashboard";
 
 import PrivateRoute from "./auth/PrivateRoute";
 import AdminRoute from "./auth/AdminRoute";
+
+import AddBook from "./admin/AddBook";
 
 import CartContext from "./providers/CartContext";
 import { itemTotal } from "./core/cartHelper";
@@ -28,6 +29,8 @@ const Routes = () => {
 
             <PrivateRoute path="/orders" exact component={Orders} />
             <PrivateRoute path="/cart" exact component={Cart} />
+
+            <AdminRoute path="/create/book" exact component={AddBook} />
           </Switch>
         </BrowserRouter>
       </div>
