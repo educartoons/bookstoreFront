@@ -96,7 +96,7 @@ const AddBook = () => {
         </label>
         <input
           className="form-control"
-          type="text"
+          type="number"
           value={price}
           onChange={handleChange("price")}
           required
