@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "name": "bookstore-front-2",
+  "build": {
+    "env": {
+      "REACT_APP_API_URL": "https://backend-api-pushy-scent.now.sh/api"
+    }
+  }
+}
