@@ -3,6 +3,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { API } from "../config";
 import { isAuthenticated } from "../auth";
 import { changeStatusBook } from "./apiCore";
+import { addItem, itemTotal } from "./cartHelper";
+
+import CartContext from "../providers/CartContext";
 
 const Card = ({
   book,
@@ -14,16 +17,18 @@ const Card = ({
 
   const { user, token } = isAuthenticated();
 
-  const handleInactive = (productId, active) => {
+  const [cart, setCart] = useContext(CartContext);
+
+  const handleInactive = (bookId, active) => {
     setLoading(true);
-    // changeStatusBook(user._id, token, productId, { active })
-    //   .then(book => {
-    //     setLoading(false);
-    //     setIsActive(book.active);
-    //   })
-    //   .catch(err => {
-    //     //console.err(err);
-    //   });
+    changeStatusBook(user._id, token, bookId, { active })
+      .then(book => {
+        setLoading(false);
+        setIsActive(book.active);
+      })
+      .catch(err => {
+        //console.err(err);
+      });
   };
 
   useEffect(() => {
@@ -31,7 +36,9 @@ const Card = ({
   }, [book]);
 
   const addToCart = () => {
-    //addItem(product, () => {});
+    addItem(book, () => {
+      setCart(itemTotal);
+    });
   };
 
   return (
