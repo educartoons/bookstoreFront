@@ -10,6 +10,7 @@ import PrivateRoute from "./auth/PrivateRoute";
 import AdminRoute from "./auth/AdminRoute";
 
 import AddBook from "./admin/AddBook";
+import Users from "./admin/Users";
 
 import CartContext from "./providers/CartContext";
 import { itemTotal } from "./core/cartHelper";
@@ -31,6 +32,7 @@ const Routes = () => {
             <PrivateRoute path="/cart" exact component={Cart} />
 
             <AdminRoute path="/create/book" exact component={AddBook} />
+            <AdminRoute path="/users" exact component={Users} />
           </Switch>
         </BrowserRouter>
       </div>
