@@ -40,8 +40,8 @@ const Orders = () => {
               </td>
               <td>
                 <ul>
-                  {order.products.map((product, i) => (
-                    <li key={i}>{product.name}</li>
+                  {order.books.map((book, i) => (
+                    <li key={i}>{book.name}</li>
                   ))}
                 </ul>
               </td>

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 
 import { signout, isAuthenticated } from "../auth";
+import CartContext from "../providers/CartContext";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -12,6 +13,7 @@ const isActive = (history, path) => {
 };
 
 const Menu = ({ history }) => {
+  const cart = useContext(CartContext);
   return (
     <div>
       <ul className="nav nav-tabs bg-primary">
@@ -48,7 +50,9 @@ const Menu = ({ history }) => {
                       padding: "2px 6px",
                       backgroundColor: "black"
                     }}
-                  ></small>
+                  >
+                    {cart[0]}
+                  </small>
                 </sup>
               </Link>
             </li>
