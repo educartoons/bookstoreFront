@@ -32,6 +32,7 @@ const Card = ({
   };
 
   useEffect(() => {
+    console.log();
     setIsActive(book.active);
   }, [book]);
 
