@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./core/Home";
 import Signup from "./user/Signup";
 import Signin from "./user/Signin";
+import Orders from "./core/Orders";
 import UserDashboard from "./user/UserDashboard";
 
 import PrivateRoute from "./auth/PrivateRoute";
@@ -25,6 +26,7 @@ const Routes = () => {
             <Route path="/signin" exact component={Signin} />
             <Route path="/signup" exact component={Signup} />
 
+            <PrivateRoute path="/orders" exact component={Orders} />
             <PrivateRoute path="/cart" exact component={Cart} />
           </Switch>
         </BrowserRouter>
