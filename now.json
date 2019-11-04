@@ -3,7 +3,7 @@
   "name": "bookstore-front-2",
   "build": {
     "env": {
-      "REACT_APP_API_URL": "https://warm-coast-70297.herokuapp.com/api/books"
+      "REACT_APP_API_URL": "https://warm-coast-70297.herokuapp.com/api"
     }
   }
 }
