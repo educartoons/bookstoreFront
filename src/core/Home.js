@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { isAuthenticated } from "../auth";
-import { getBooks } from "./apiCore";
+import { getBooks, searchBooks } from "./apiCore";
 import Layout from "./Layout";
 import Card from "./Card";
 
@@ -10,6 +10,7 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [booksNumber, setBooksNumber] = useState(0);
+  // const [error, setError] = useState(false);
 
   const limit = 6;
 
@@ -18,6 +19,7 @@ const Home = () => {
   const loadBooks = () => {
     getBooks({ limit: limit, page: page }).then(data => {
       if (data.error) {
+        // setError(data.error);
       } else {
         setBooksNumber(data.booksNumber);
         setBooks(data.books);
@@ -53,15 +55,16 @@ const Home = () => {
     </nav>
   );
 
-  const searchBooks = () => {
-    // searchProducts(search)
-    //   .then(({ data, size }) => {
-    //     if (size === 0) {
-    //     }
-    //     setBooks(data);
-    //     setBooksNumber(0);
-    //   })
-    //   .catch(err => console.error(err));
+  const searchBooksAPI = () => {
+    console.log("Searching");
+    searchBooks(search)
+      .then(({ data, size }) => {
+        if (size === 0) {
+        }
+        setBooks(data);
+        setBooksNumber(0);
+      })
+      .catch(err => console.error(err));
   };
 
   const handleSearch = e => {
@@ -73,7 +76,7 @@ const Home = () => {
     if (search === "") {
       loadBooks();
     } else {
-      searchBooks();
+      searchBooksAPI();
     }
   };
 
@@ -99,7 +102,7 @@ const Home = () => {
   return (
     <Layout
       title="Home Page"
-      description="Bookstore App"
+      description="Bookstore"
       className="container-fluid"
     >
       <div className="row">
@@ -109,16 +112,16 @@ const Home = () => {
 
         <div className="col-4">
           {isAuthenticated() && isAuthenticated().user.role === 1 && (
-            <Link className="btn btn-warning btn-lg mb-3" to="/create/product">
-              Create product
+            <Link className="btn btn-warning btn-lg mb-3" to="/create/book">
+              Create book
             </Link>
           )}
         </div>
       </div>
       <h2 className="mb-4">Books</h2>
       <div className="row">
-        {books.map((product, i) => (
-          <Card key={i} product={product} />
+        {books.map((book, i) => (
+          <Card key={i} book={book} />
         ))}
       </div>
       <div className="row">

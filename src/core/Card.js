@@ -5,12 +5,12 @@ import { isAuthenticated } from "../auth";
 import { changeStatusBook } from "./apiCore";
 
 const Card = ({
-  product,
+  book,
   showAddToCartButton = true,
   showRemoveFromCartButton = false
 }) => {
   const [loading, setLoading] = useState(false);
-  const [isActive, setIsActive] = useState(product.active);
+  const [isActive, setIsActive] = useState(book.active);
 
   const { user, token } = isAuthenticated();
 
@@ -27,8 +27,8 @@ const Card = ({
   };
 
   useEffect(() => {
-    setIsActive(product.active);
-  }, [product]);
+    setIsActive(book.active);
+  }, [book]);
 
   const addToCart = () => {
     //addItem(product, () => {});
@@ -37,18 +37,18 @@ const Card = ({
   return (
     <div className="col-4 mb-3">
       <div className="card">
-        <div className="card-header">{product.name}</div>
+        <div className="card-header">{book.name}</div>
         <div className="card-body">
-          <p>{product.author}</p>
-          <p>{product.price}</p>
-          <p>{product.keywords}</p>
+          <p>{book.author}</p>
+          <p>{book.price}</p>
+          <p>{book.keywords}</p>
 
           {isAuthenticated() && isAuthenticated().user.role === 1 && (
             <>
               <p>
                 <a
                   className="btn btn-success"
-                  href={`${API}/file/${product.fileName}?token=${token}`}
+                  href={`${API}/file/${book.fileName}?token=${token}`}
                 >
                   Download book
                 </a>{" "}
@@ -57,7 +57,7 @@ const Card = ({
               {isActive ? (
                 <button
                   className="btn btn-danger mr-2"
-                  onClick={() => handleInactive(product._id, !isActive)}
+                  onClick={() => handleInactive(book._id, !isActive)}
                   disabled={loading}
                 >
                   {loading ? "Inactivating" : "Inactivate"}
@@ -65,7 +65,7 @@ const Card = ({
               ) : (
                 <button
                   className="btn btn-primary mr-2"
-                  onClick={() => handleInactive(product._id, !isActive)}
+                  onClick={() => handleInactive(book._id, !isActive)}
                   disabled={loading}
                 >
                   {loading ? "Activating" : "Activate"}
