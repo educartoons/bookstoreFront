@@ -11,7 +11,7 @@ const Home = () => {
   const [page, setPage] = useState(1);
   const [booksNumber, setBooksNumber] = useState(0);
   const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const limit = 6;
 
@@ -25,6 +25,7 @@ const Home = () => {
         // setError(data.error);
       } else {
         setLoading(false);
+        setSuccess(true);
         setBooksNumber(data.booksNumber);
         setBooks(data.books);
       }
@@ -90,6 +91,12 @@ const Home = () => {
     </div>
   );
 
+  const showEmptyBooks = () => (
+    <div className="alert alert-secondary" role="alert">
+      There are not books
+    </div>
+  );
+
   const searchForm = () => (
     <form action="" className="mb-4" onSubmit={searchSubmit}>
       <span className="input-group-text">
@@ -131,6 +138,8 @@ const Home = () => {
       <h2 className="mb-4">Books</h2>
 
       {loading && showLoading()}
+
+      {success && books.length > 0 && showEmptyBooks()}
 
       <div className="row">
         {books.map((book, i) => (
